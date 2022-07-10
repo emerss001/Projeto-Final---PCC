@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <br>
+            <button class="btn btn-success" type="submit">Salvar</button>
+            <a href="/clientes/" class="btn btn-danger">Cancelar</a>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

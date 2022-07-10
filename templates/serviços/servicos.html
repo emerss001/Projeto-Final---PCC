@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <div class="card-body">
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Adicionar novo serviço
+  </button>
+
+
+  
+  <!-- Modal -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Adicione aqui novos serviços</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Salvar">
+        </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+    
+
+    <br><br><br>
+
+
+    <div class="row">
+      {% if serviços %}
+        {% for i in serviços %}
+        <div class="col-md-4">
+          <div class="card" style="width: 23rem;">  
+              <img src="{% static 'servicos/img/icone.jpg' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <center>
+              <h5 class="card-title">{{i.Nome}}</h5>
+              <a href="/clientes/{{i.id}}" class="btn btn-primary">Ver clientes</a>
+              <a href="/serviços/editar/{{i.id}}" class="btn btn-warning">Editar</a>
+              <a href="/serviços/excluir/{{i.id}}" class="btn btn-danger">Excluir</a>
+            </center>
+              </div>
+        </div>
+      </div>
+        {% endfor %}
+      {% endif %}
+        
+
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}

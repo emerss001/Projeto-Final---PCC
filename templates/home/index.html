@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  table{
+    background-color: #58af9b;
+    border-radius: 5px;
+    font-size: 22px;
+  }
+
+  .btn{
+    background-color: #58af9b !important;
+    border: none;
+  }
+
+  .btn:hover{
+    background-color: #60d86c !important;
+  }
+  
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+     
+<script>
+  
+  $("#celular").mask("(00) 00000-0000");
+
+  var options = {
+    onKeyPress: function (cpf, ev, el, op) {
+        var masks = ['000.000.000-000', '00.000.000/0000-00'];
+        $('.cpf_cnpj1').mask((cpf.length > 14) ? masks[1] : masks[0], op);
+    }
+}
+
+$('.cpf_cnpj1').length > 11 ? $('.cpf_cnpj1').mask('00.000.000/0000-00', options) : $('.cpf_cnpj1').mask('000.000.000-00#', options);
+
+var options = {
+    onKeyPress: function (cpf, ev, el, op) {
+        var masks = ['000.000.000-000', '00.000.000/0000-00'];
+        $('.cpf_cnpj2').mask((cpf.length > 14) ? masks[1] : masks[0], op);
+    }
+}
+
+$('.cpf_cnpj2').length > 11 ? $('.cpf_cnpj2').mask('00.000.000/0000-00', options) : $('.cpf_cnpj2').mask('000.000.000-00#', options);
+
+  
+</script>
+
+  
+
+
+  <div class="card">
+    <div class="card-body">
+      <h3>Preencha as informações para gerar o seu recibo</h3> <br><br>
+      <h5>Dados do recibo</h5>
+
+
+
+        <form action="{% url 'gerador' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% load widget_tweaks %} 
+          <div class="form-group row">
+            <div class="form-group col-md-3">
+              <label for="date">Data</label>
+              <input type="date" class="form-control" name="data" required>
+            </div>
+  
+            
+            <div class="form-group col-md-4">
+              <label for="Número">Número do recibo</label>
+              <input type="text" class="form-control" name="nro" placeholder="123" required>
+            </div>
+  
+  
+          </div>
+  
+          <br><br>
+  
+  
+            <table class="table table-striped">
+              <tbody>
+                <td>Dados do pagador:</td>
+              </tbody>
+            </table>
+  
+            <div class="form-group row">
+              <div class="form-group col-md-4">
+                <label for="inputNome">Nome</label>
+                <input type="text" class="form-control" name="nome_pagador" required>
+              </div>
+  
+              <div class="form-group col-md-4">
+                <label for="inputEndereco">CPF/CNPJ</label>
+                <input type="text" class="form-control cpf_cnpj1" name="pagadorcpf" required>
+              </div>
+  
+  
+              <div class="form-group col-md-4">
+                <label for="inputEndereco">Celular</label>
+                <input type="tel" class="form-control" name="celular" id="celular" required>
+              </div>
+          </div>
+  
+        <br><br>
+  
+  
+        <table class="table table-striped">
+          <tbody>
+            <td>Dados do beneficiário:</td>
+          </tbody>
+        </table>
+  
+  
+        
+        <div class="form-group row">
+          <div class="form-group col-md-8">
+            <label for="inputNome">Nome</label>
+            <input type="text" class="form-control" name="nome_beneficiario" required>
+          </div>
+  
+          <div class="form-group col-md-4">
+            <label for="inputEndereco">CPF/CNPJ</label>
+            <input type="text" class="form-control cpf_cnpj2" name="benecpf" required>
+          </div>
+  
+  
+          <div class="form-group col-md-4">
+            <label>Estado</label>
+            <select class="form-control" id="estado" onchange="buscaCidades(this.value)" name="estado" required>
+              <option selected>Selecione estado</option>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AM">Amazonas</option>
+              <option value="AP">Amapá</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="PR">Paraná</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SE">Sergipe</option>
+              <option value="SP">São Paulo</option>
+              <option value="TO">Tocantins</option>
+            </select>
+          </div>
+  
+          <div class="form-group col-md-4">
+            <label>Cidade</label>
+            <select id="cidade" class="form-control" name="cidade" required>
+              <option selected>Selecione cidade</option>
+            </select>
+          </div>
+      </div>
+  
+  
+      <br><br>
+  
+  
+      <table class="table table-striped">
+        <tbody>
+          <td>Serviço/Produto:</td>
+        </tbody>
+      </table>
+  
+      <div class="form-group row">
+        <div class="form-group col-md-8">
+          <label for="inputNome">Descrição</label>
+          <input type="text" class="form-control" name="desc">
+        </div>
+  
+        <div class="form-group col-md-2">
+          <label for="inputEndereco">Valor</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+            <div class="input-group-text">R$</div>
+            </div>
+          <input type="text" class="form-control" name="valor" required>
+          </div>
+    </div>
+  
+  <br>
+          <div class="form-group">
+            <div class="form-check">
+              <button type="submit" class="btn">Gerar</button>
+            </div>
+          </div>
+
+      </form>
+      </form>
+
+     
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar</title>
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column">
+                <h2 class="title title-primary">seja bem vindo!</h2>
+                <p class="description description-primary">Insira seus dados pessoais</p>
+                <p class="description description-primary">para utilizar nossos serviços</p>
+                <a href="{% url 'login' %}"><button id="signin" class="btn btn-primary">entrar</button></a>
+            </div>   
+            
+            
+            <div class="second-column">
+                <h2 class="title title-second">Criar uma Conta</h2>
+                <p class="description description-second">use seu e-mail para cadastro:</p>
+
+                <form class="form" method="post" action="/usuario/criar">
+                    {% csrf_token %}
+                    {% load widget_tweaks %} 
+                    <label class="label-input">
+                        <i class="far fa-user icon-modify"></i>
+                        {% render_field form.username class="form-control" placeholder="username" type="text" %} 
+   
+                    </label>
+                    
+                    <label class="label-input">
+                        <i class="far fa-envelope icon-modify"></i>
+                        {% render_field form.email class="form-control" placeholder="email" type="email" %} 
+                    </label>
+                    
+                    <label class="label-input">
+                        <i class="fas fa-lock icon-modify"></i>
+                        {% render_field form.password1 class="form-control" placeholder="password" type="password" %} 
+                    </label>
+
+                    <label class="label-input">
+                        <i class="fas fa-lock icon-modify"></i>
+                        {% render_field form.password2 class="form-control" placeholder="password" type="password" %} 
+                    </label>
+                    
+                    <button type="submit" class="btn btn-second">cadastrar</button>
+                </form>
+            </div>
+        </div>
+
+
+
+ 
+</body>
+</html>

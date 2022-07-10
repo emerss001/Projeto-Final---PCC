@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Refresh" content="0; /home" />
+  </head>
+</html>
+
+
+                <div id="sua_div">
+                    <div class="card-body">
+                        {% for ReciboPadrao in dados %}
+                        <h2 class="">
+                            Recibo de Pagamento - {{ ReciboPadrao.nrro_recibo }}                         
+                        </h2>
+
+
+                            <br>
+                            <h3 class="h8">
+                            Dados do recibo
+                            </h3>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th colspan="2">Data de emissão</th>
+                                <td class="text-right">{{ ReciboPadrao.data }}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="h8">
+                            Dados do pagador
+                        </h3>
+                        <table class="table">
+                            <tr>
+                                <th colspan="2">Nome</th>
+                                <td class="text-right">{{ ReciboPadrao.nome_pagador }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">CPF/CNPJ</th>
+                                <td class="text-right">{{ ReciboPadrao.cpf_cnpj_pagador }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Celular</th>
+                                <td class="text-right">{{ ReciboPadrao.celular }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h3 class="h8">
+                            Dados do beneficiário
+                        </h3>
+                        <table class="table">
+                            <tr>
+                                <th colspan="2">Nome</th>
+                                <td class="text-right">{{ ReciboPadrao.nome_beneficiario }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">CPF/CNPJ</th>
+                                <td class="text-right">{{ ReciboPadrao.cpf_cnpj_beneficiario }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Cidade</th>
+                                <td class="text-right">{{ ReciboPadrao.cidade }} - {{ ReciboPadrao.estado }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="h8">
+                            Serviço/Produto
+                        </h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th colspan="2">Descrição</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                                                                                                                    <tr>
+                                <td>{{ ReciboPadrao.descricao }}</td>
+                                <td class="text-right">{{ ReciboPadrao.valor }}</td>
+                                </tr>
+                                </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <b>Valor total:</b>{{ ReciboPadrao.valor }}                                   
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                                                
+                
+                    <div class="card-body text-center">
+                        <p>
+                            Este recibo serve como comprovante do pagamento realizado e recebido, não<br class="d-none d-lg-block">
+                            restando mais nada em aberto, referente ao que está descrito no documento.
+                        </p>
+                        
+                        <br><br>
+                      
+
+                        <div class="card-signature">
+                            <p class="font-weight-bold">{{ ReciboPadrao.nome_beneficiario }}  - {{ ReciboPadrao.cpf_cnpj_beneficiario }} </th>                          
+                        </div>
+                    </div>
+                    {% endfor %}
+    </div>
+
+
+
+<script>
+        window.onload = pr;   
+        function pr() {
+            window.print();
+            window.save();
+            
+            }
+
+
+</script>
+
+
+{% endblock%}
+</body>
+</html>

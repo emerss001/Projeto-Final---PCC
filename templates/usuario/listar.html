@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<form class="form" action="" method="post">
+
+    {% csrf_token %}
+    {% load widget_tweaks %} 
+
+    <label for="Número">Cidade</label><br>
+    {% render_field form.cidade type="text" class="form-control" %}
+    <br><label for="Número">Nome</label>
+    {% render_field form.first_name type="text" class="form-control"  %}
+    <br><label for="Número">Sobrenome</label>
+    {% render_field form.last_name type="text" class="form-control"  %}
+    <br><label for="Número">Telefone</label>
+    {% render_field form.telefone type="text" class="form-control"  %}
+    <br><label for="Número">CPF</label>
+    {% render_field form.cpf type="text" class="form-control"  %}
+
+<br><br>
+    <input type="submit" value="Salvar" class="btn btn-success">
+    <a href="/perfil/" class="btn btn-danger">Cancelar</a>
+    </form>
+   
+    {% endblock%}
+    
+
