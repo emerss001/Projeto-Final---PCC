@@ -1,0 +1,14 @@
+.profile-button {
+    background: #58af9b;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #60d86c;
+}
+
+.labels {
+    font-size: 11px
+}
+

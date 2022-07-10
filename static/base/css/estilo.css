@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
+
+
+body{
+    background-color: #ecf0f1;
+    margin-top: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar{
+    font-size: 20px;
+}
+
+    
+.nav-link:hover {
+    color: #60d86c !important;
+}
+
+.dropdown-toggle{
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+a{
+    text-decoration: none !important;
+}
